@@ -1,8 +1,9 @@
 package gn222gq.view;
 
+/**
+ * View for displaying output and getting input.
+ */
 public interface View {
-  public void displayLine(String line);
-  public void displayLines(String[] lines);
-  public void displayHeader(String header);
-  public String getUserInput(String prompt);
+  void displayLine(String line);
+  String getUserInput(String prompt);
 }

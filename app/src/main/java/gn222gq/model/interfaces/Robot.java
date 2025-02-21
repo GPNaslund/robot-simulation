@@ -8,11 +8,11 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public interface Robot {
-  public void place(Position position, Direction direction);
-  public void move();
-  public void rotate(TurnDirection turnDirection);
+  void place(Position position, Direction direction);
+  void move();
+  void rotate(TurnDirection turnDirection);
 
-  public Optional<String> createReport();
+  Optional<String> createReport();
 
-  public void resetPosition();
+  void resetPosition();
 }

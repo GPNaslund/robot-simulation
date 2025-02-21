@@ -101,19 +101,19 @@ public class ToyRobotTest {
     assertEquals(0.0, southMoved.y());
     assertEquals(1.0, southMoved.x());
 
-    // EAST -> SUBTRACTS FROM X
+    // EAST -> ADDS TO X
     this.sut.place(new Position(1.0, 1.0), Direction.EAST);
     this.sut.move();
     Position eastMoved = this.sut.getPosition();
     assertEquals(1.0, eastMoved.y());
-    assertEquals(0.0, eastMoved.x());
+    assertEquals(2.0, eastMoved.x());
 
-    // WEST -> ADDS TO X
-    this.sut.place(new Position(0.0, 0.0), Direction.WEST);
+    // WEST -> SUBTRACTS FROM X
+    this.sut.place(new Position(1.0, 1.0), Direction.WEST);
     this.sut.move();
     Position westMoved = this.sut.getPosition();
-    assertEquals(0.0, westMoved.y());
-    assertEquals(1.0, westMoved.x());
+    assertEquals(1.0, westMoved.y());
+    assertEquals(0.0, westMoved.x());
   }
 
   @Test

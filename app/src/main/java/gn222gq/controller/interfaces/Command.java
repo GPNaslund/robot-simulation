@@ -1,5 +1,13 @@
 package gn222gq.controller.interfaces;
 
+
+/**
+ * The Command interface.
+ */
 public interface Command {
-  public void execute();
+
+  /**
+   * Method for executing the command.
+   */
+  void execute();
 }

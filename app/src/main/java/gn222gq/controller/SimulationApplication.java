@@ -11,23 +11,38 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * The main simulation application.
+ */
 public class SimulationApplication {
   private final SimulationApplicationConfig config;
 
+  /**
+   * Instantiates a new Simulation application.
+   *
+   * @param config the config
+   */
   public SimulationApplication(SimulationApplicationConfig config) {
     Objects.requireNonNull(config);
     this.config = config;
   }
 
+  /**
+   * Start simulation.
+   */
   public void startSimulation() {
     Optional<ArrayList<ArrayList<Command>>> commands = readCommands();
     commands.ifPresent(this::executeCommands);
 }
 
+  /**
+   * Helper method for executing the parsed commands.
+   *
+   * @param commands list with lists of commands to execute.
+   */
   private void executeCommands(ArrayList<ArrayList<Command>> commands) {
     for (ArrayList<Command> setOfCommands : commands) {
       config.getRobot().resetPosition();
@@ -37,7 +52,14 @@ public class SimulationApplication {
     }
   }
 
+  /**
+   * Helper method for loading text file and getting commands from
+   * input parser.
+   *
+   * @return Optional that might contain 2d-list with commands.
+   */
   private Optional<ArrayList<ArrayList<Command>>> readCommands() {
+    // Checks if filepath is provided, and prompts user if not provided.
     String filePath = config.getFilePath();
     if (filePath == null) {
       Optional<String> newFilePath = promptForFilePathInput();
@@ -47,6 +69,8 @@ public class SimulationApplication {
       filePath = newFilePath.get();
     }
 
+    // Loads file and gets commands from input parser. Prompts user
+    // for another file if provided filepath is not available.
     while (true) {
       try (FileReader fileReader = new FileReader(filePath)){
         BufferedReader bufReader = new BufferedReader(fileReader);
@@ -65,6 +89,10 @@ public class SimulationApplication {
     }
   }
 
+  /**
+   * Helper method for prompting user for file path.
+   * @return Optional with user provided string.
+   */
   private Optional<String> promptForFilePathInput() {
     View view = config.getView();
     view.displayLine("Could not find any file, do you want to provide one?");
@@ -82,6 +110,10 @@ public class SimulationApplication {
     }
   }
 
+  /**
+   * Helper method for prompting user for file path + validates the path.
+   * @return The user provided string.
+   */
   private String promptForFilePath() {
     View view = config.getView();
     while (true) {

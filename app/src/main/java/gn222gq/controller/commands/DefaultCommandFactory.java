@@ -9,10 +9,19 @@ import gn222gq.view.View;
 
 import java.util.Objects;
 
+/**
+ * Default implementation of Command Factory.
+ */
 public class DefaultCommandFactory implements CommandFactory {
   private final Robot robot;
   private final View view;
 
+  /**
+   * Instantiates a new Default command factory.
+   *
+   * @param robot the robot
+   * @param view  the view
+   */
   public DefaultCommandFactory(Robot robot, View view) {
     Objects.requireNonNull(robot);
     Objects.requireNonNull(view);

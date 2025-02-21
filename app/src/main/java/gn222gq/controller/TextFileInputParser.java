@@ -4,24 +4,37 @@ import gn222gq.controller.interfaces.Command;
 import gn222gq.controller.interfaces.CommandFactory;
 import gn222gq.controller.interfaces.InputParser;
 import gn222gq.model.enums.Direction;
-import gn222gq.model.interfaces.Robot;
-import gn222gq.view.View;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
+
+/**
+ * Input parser that converts a text file with commands into command objects.
+ */
 public class TextFileInputParser implements InputParser {
   private final CommandFactory commandFactory;
+
+  /**
+   * Instantiates a new Text file input parser.
+   *
+   * @param commandFactory the command factory
+   */
   public TextFileInputParser(CommandFactory commandFactory) {
     Objects.requireNonNull(commandFactory);
 
     this.commandFactory = commandFactory;
   }
 
+  /**
+   * Method for parsing input file into a list with lists of commands.
+   * @param reader The bufferedReder to get lines of text from.
+   * @return An list containing lists of commands.
+   * @throws IOException On failure of reading file.
+   */
   @Override
   public ArrayList<ArrayList<Command>> parseInputFile(BufferedReader reader) throws IOException {
     Objects.requireNonNull(reader);
@@ -47,6 +60,11 @@ public class TextFileInputParser implements InputParser {
       return result;
   }
 
+  /**
+   * Helper method for parsing a line containing a command.
+   * @param line The text line containing a command.
+   * @return
+   */
   private Optional<Command> parseLine(String line) {
     String[] splitted = line.split(",");
     return switch (splitted[0].toLowerCase()) {
@@ -59,6 +77,11 @@ public class TextFileInputParser implements InputParser {
     };
   }
 
+  /**
+   * Helper method for creating the place command containing poistion and direction.
+   * @param splittedLine Array with strings containing the details.
+   * @return An optional that might contain the place command.
+   */
   private Optional<Command> createPlaceCommand(String[] splittedLine) {
     try {
       double xPosition = Double.parseDouble(splittedLine[1]);

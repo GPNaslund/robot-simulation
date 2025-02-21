@@ -34,3 +34,7 @@ tasks.jacocoTestReport {
 application {
     mainClass = "gn222gq.Main"
 }
+
+tasks.run.configure {
+    standardInput = System.`in`
+}
