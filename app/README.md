@@ -1,6 +1,6 @@
 # Robot simulation
 ## Class diagram
-
+![Alt class-diagram](./Class_diagram.png)
 ## Running the app
 The application needs a .txt file with commands to execute. The .txt file can be provided through application arguments or interactively provided in the application. 
 
